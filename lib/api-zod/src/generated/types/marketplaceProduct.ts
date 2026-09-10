@@ -5,9 +5,6 @@
  * API specification
  * OpenAPI spec version: 0.1.0
  */
-export interface HealthStatus {
-  status: string;
-}
 
 export interface MarketplaceProduct {
   id: number;
@@ -21,22 +18,3 @@ export interface MarketplaceProduct {
   sellerName: string;
   categoryName: string;
 }
-
-export interface Category {
-  id: number;
-  name: string;
-  description: string;
-}
-
-export interface Error {
-  error: string;
-}
-
-export type ListProductsParams = {
-search?: string;
-/**
- * @minimum 1
- */
-categoryId?: number;
-};
-

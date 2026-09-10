@@ -6,7 +6,9 @@ import { ErrorBoundary } from '@/components/error-boundary';
 import { Toaster } from '@/components/ui/toaster';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import NotFound from '@/pages/not-found';
-import { Route, Switch, useLocation, Router as WouterRouter } from 'wouter';
+import ProductDetail from '@/pages/product-detail';
+import Products from '@/pages/products';
+import { Link, Route, Switch, useLocation, Router as WouterRouter } from 'wouter';
 
 const queryClient = new QueryClient();
 
@@ -102,10 +104,6 @@ function Home() {
   const [searchOpen, setSearchOpen] = useState(false);
 
   const closeMenu = () => setMenuOpen(false);
-  const scrollTo = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-    closeMenu();
-  };
 
   return (
     <main id="top" className="marketly-grain min-h-[100dvh] overflow-hidden bg-background">
@@ -159,10 +157,10 @@ function Home() {
               Marketly is where curious people meet independent makers. Thoughtful goods, small-batch finds, and the stories that make them worth keeping.
             </p>
             <div className="reveal-up reveal-delay-3 mt-9 flex flex-wrap items-center gap-3">
-              <button type="button" onClick={() => scrollTo('discover')} className="group flex items-center gap-3 rounded-full bg-primary px-6 py-3.5 text-[13px] font-semibold text-primary-foreground transition-transform hover:-translate-y-1" data-testid="button-browse-collection">
+              <Link href="/products" className="group flex items-center gap-3 rounded-full bg-primary px-6 py-3.5 text-[13px] font-semibold text-primary-foreground transition-transform hover:-translate-y-1" data-testid="button-browse-collection">
                 Browse the collection
                 <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
-              </button>
+              </Link>
               <a href="#story" className="flex items-center gap-2 rounded-full px-4 py-3.5 text-[13px] font-semibold text-primary transition-colors hover:bg-muted" data-testid="link-learn-more">
                 Why Marketly
                 <MoveUpRight size={15} />
@@ -307,6 +305,8 @@ function Router() {
     <RoutedErrorBoundary>
       <Switch>
         <Route path="/" component={Home} />
+        <Route path="/products" component={Products} />
+        <Route path="/products/:id" component={ProductDetail} />
         <Route component={NotFound} />
       </Switch>
     </RoutedErrorBoundary>

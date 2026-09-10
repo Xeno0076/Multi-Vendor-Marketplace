@@ -10,6 +10,10 @@ servers:
 tags:
   - name: health
     description: Health operations
+  - name: products
+    description: Marketplace product catalog
+  - name: categories
+    description: Marketplace product categories
 paths:
   /healthz:
     get:
@@ -24,6 +28,74 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+  /products:
+    get:
+      operationId: listProducts
+      tags: [products]
+      summary: List marketplace products
+      description: Returns products with optional name search and category filtering
+      parameters:
+        - name: search
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: categoryId
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        "200":
+          description: Marketplace products
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MarketplaceProduct"
+  /products/{id}:
+    get:
+      operationId: getProduct
+      tags: [products]
+      summary: Get a marketplace product
+      description: Returns a single product with its seller and category
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        "200":
+          description: Marketplace product
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MarketplaceProduct"
+        "404":
+          description: Product not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /categories:
+    get:
+      operationId: listCategories
+      tags: [categories]
+      summary: List product categories
+      description: Returns available marketplace categories
+      responses:
+        "200":
+          description: Marketplace categories
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Category"
 components:
   schemas:
     HealthStatus:
@@ -33,4 +105,59 @@ components:
           type: string
       required:
         - status
+    MarketplaceProduct:
+      type: object
+      properties:
+        id:
+          type: integer
+        sellerId:
+          type: integer
+        categoryId:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        price:
+          type: number
+          format: double
+        image:
+          type: string
+        stock:
+          type: integer
+        sellerName:
+          type: string
+        categoryName:
+          type: string
+      required:
+        - id
+        - sellerId
+        - categoryId
+        - name
+        - description
+        - price
+        - image
+        - stock
+        - sellerName
+        - categoryName
+    Category:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+      required:
+        - id
+        - name
+        - description
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+      required:
+        - error
 

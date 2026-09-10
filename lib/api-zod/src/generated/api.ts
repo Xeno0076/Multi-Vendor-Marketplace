@@ -17,3 +17,67 @@ export const HealthCheckResponse = zod.object({
 })
 
 
+/**
+ * Returns products with optional name search and category filtering
+ * @summary List marketplace products
+ */
+
+
+
+export const ListProductsQueryParams = zod.object({
+  "search": zod.coerce.string().optional(),
+  "categoryId": zod.coerce.number().int().min(1).optional()
+})
+
+export const ListProductsResponseItem = zod.object({
+  "id": zod.number().int(),
+  "sellerId": zod.number().int(),
+  "categoryId": zod.number().int(),
+  "name": zod.string(),
+  "description": zod.string(),
+  "price": zod.number(),
+  "image": zod.string(),
+  "stock": zod.number().int(),
+  "sellerName": zod.string(),
+  "categoryName": zod.string()
+})
+export const ListProductsResponse = zod.array(ListProductsResponseItem)
+
+
+/**
+ * Returns a single product with its seller and category
+ * @summary Get a marketplace product
+ */
+
+
+
+export const GetProductParams = zod.object({
+  "id": zod.coerce.number().int().min(1)
+})
+
+export const GetProductResponse = zod.object({
+  "id": zod.number().int(),
+  "sellerId": zod.number().int(),
+  "categoryId": zod.number().int(),
+  "name": zod.string(),
+  "description": zod.string(),
+  "price": zod.number(),
+  "image": zod.string(),
+  "stock": zod.number().int(),
+  "sellerName": zod.string(),
+  "categoryName": zod.string()
+})
+
+
+/**
+ * Returns available marketplace categories
+ * @summary List product categories
+ */
+export const ListCategoriesResponseItem = zod.object({
+  "id": zod.number().int(),
+  "name": zod.string(),
+  "description": zod.string()
+})
+export const ListCategoriesResponse = zod.array(ListCategoriesResponseItem)
+
+

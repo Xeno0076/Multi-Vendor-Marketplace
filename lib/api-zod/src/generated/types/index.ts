@@ -6,4 +6,8 @@
  * OpenAPI spec version: 0.1.0
  */
 
+export * from './category';
+export * from './error';
 export * from './healthStatus';
+export * from './listProductsParams';
+export * from './marketplaceProduct';
