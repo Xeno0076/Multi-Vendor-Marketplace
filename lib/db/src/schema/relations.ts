@@ -7,12 +7,21 @@ import { orderItemsTable } from "./order-items";
 import { ordersTable } from "./orders";
 import { productsTable } from "./products";
 import { sellersTable } from "./sellers";
+import { sessionsTable } from "./sessions";
 import { usersTable } from "./users";
 
 export const usersRelations = relations(usersTable, ({ one, many }) => ({
   seller: one(sellersTable),
+  sessions: many(sessionsTable),
   cart: one(cartsTable),
   orders: many(ordersTable),
+}));
+
+export const sessionsRelations = relations(sessionsTable, ({ one }) => ({
+  user: one(usersTable, {
+    fields: [sessionsTable.userId],
+    references: [usersTable.id],
+  }),
 }));
 
 export const sellersRelations = relations(sellersTable, ({ one, many }) => ({

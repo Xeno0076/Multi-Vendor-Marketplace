@@ -32,6 +32,64 @@ export interface Error {
   error: string;
 }
 
+export type RegisterRequestRole = typeof RegisterRequestRole[keyof typeof RegisterRequestRole];
+
+
+export const RegisterRequestRole = {
+  customer: 'customer',
+  seller: 'seller',
+} as const;
+
+export interface RegisterRequest {
+  /**
+     * @minLength 2
+     * @maxLength 100
+     */
+  name: string;
+  email: string;
+  /**
+     * @minLength 8
+     * @maxLength 128
+     */
+  password: string;
+  role: RegisterRequestRole;
+}
+
+export interface LoginRequest {
+  email: string;
+  /**
+     * @minLength 1
+     * @maxLength 128
+     */
+  password: string;
+}
+
+export interface SellerProfile {
+  id: number;
+  storeName: string;
+  description: string;
+}
+
+export type AuthUserRole = typeof AuthUserRole[keyof typeof AuthUserRole];
+
+
+export const AuthUserRole = {
+  customer: 'customer',
+  seller: 'seller',
+} as const;
+
+export interface AuthUser {
+  id: number;
+  name: string;
+  email: string;
+  role: AuthUserRole;
+  seller?: SellerProfile;
+}
+
+export interface AuthLogoutResponse {
+  success: boolean;
+}
+
 export type ListProductsParams = {
 search?: string;
 /**

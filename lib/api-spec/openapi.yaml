@@ -14,6 +14,8 @@ tags:
     description: Marketplace product catalog
   - name: categories
     description: Marketplace product categories
+  - name: auth
+    description: Customer and seller authentication
 paths:
   /healthz:
     get:
@@ -96,6 +98,96 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Category"
+  /auth/register:
+    post:
+      operationId: register
+      tags: [auth]
+      summary: Register a marketplace account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegisterRequest"
+      responses:
+        "201":
+          description: Registered user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthUser"
+        "400":
+          description: Invalid registration details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "409":
+          description: Email already registered
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /auth/login:
+    post:
+      operationId: login
+      tags: [auth]
+      summary: Log in to a marketplace account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginRequest"
+      responses:
+        "200":
+          description: Authenticated user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthUser"
+        "400":
+          description: Invalid login details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /auth/logout:
+    post:
+      operationId: logout
+      tags: [auth]
+      summary: Log out of the current session
+      responses:
+        "200":
+          description: Logged out
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthLogoutResponse"
+  /auth/me:
+    get:
+      operationId: getCurrentUser
+      tags: [auth]
+      summary: Get the current authenticated user
+      responses:
+        "200":
+          description: Current user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthUser"
+        "401":
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
 components:
   schemas:
     HealthStatus:
@@ -160,4 +252,78 @@ components:
           type: string
       required:
         - error
+    RegisterRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 2
+          maxLength: 100
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          minLength: 8
+          maxLength: 128
+        role:
+          type: string
+          enum: [customer, seller]
+      required:
+        - name
+        - email
+        - password
+        - role
+    LoginRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          minLength: 1
+          maxLength: 128
+      required:
+        - email
+        - password
+    SellerProfile:
+      type: object
+      properties:
+        id:
+          type: integer
+        storeName:
+          type: string
+        description:
+          type: string
+      required:
+        - id
+        - storeName
+        - description
+    AuthUser:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+        role:
+          type: string
+          enum: [customer, seller]
+        seller:
+          $ref: "#/components/schemas/SellerProfile"
+      required:
+        - id
+        - name
+        - email
+        - role
+    AuthLogoutResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+        - success
 

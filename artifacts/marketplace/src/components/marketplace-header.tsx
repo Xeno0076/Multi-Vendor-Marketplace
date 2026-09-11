@@ -1,5 +1,6 @@
 import { ArrowLeft, Search, ShoppingBag } from 'lucide-react';
 import { Link } from 'wouter';
+import { AuthHeaderActions } from '@/components/auth-header-actions';
 
 type MarketplaceHeaderProps = {
   backLabel?: string;
@@ -38,6 +39,7 @@ export function MarketplaceHeader({ backLabel = 'Back to collection', showBack =
             <Search size={15} strokeWidth={1.8} />
             Browse goods
           </Link>
+          <AuthHeaderActions />
           <button
             type="button"
             disabled

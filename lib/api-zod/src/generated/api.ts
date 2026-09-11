@@ -81,3 +81,83 @@ export const ListCategoriesResponseItem = zod.object({
 export const ListCategoriesResponse = zod.array(ListCategoriesResponseItem)
 
 
+/**
+ * @summary Register a marketplace account
+ */
+export const registerBodyNameMin = 2;
+export const registerBodyNameMax = 100;
+
+export const registerBodyPasswordMin = 8;
+export const registerBodyPasswordMax = 128;
+
+
+
+export const RegisterBody = zod.object({
+  "name": zod.string().min(registerBodyNameMin).max(registerBodyNameMax),
+  "email": zod.string().email(),
+  "password": zod.string().min(registerBodyPasswordMin).max(registerBodyPasswordMax),
+  "role": zod.enum(['customer', 'seller'])
+})
+
+export const RegisterResponse = zod.object({
+  "id": zod.number().int(),
+  "name": zod.string(),
+  "email": zod.string(),
+  "role": zod.enum(['customer', 'seller']),
+  "seller": zod.object({
+  "id": zod.number().int(),
+  "storeName": zod.string(),
+  "description": zod.string()
+}).optional()
+})
+
+
+/**
+ * @summary Log in to a marketplace account
+ */
+export const loginBodyPasswordMax = 128;
+
+
+
+export const LoginBody = zod.object({
+  "email": zod.string().email(),
+  "password": zod.string().min(1).max(loginBodyPasswordMax)
+})
+
+export const LoginResponse = zod.object({
+  "id": zod.number().int(),
+  "name": zod.string(),
+  "email": zod.string(),
+  "role": zod.enum(['customer', 'seller']),
+  "seller": zod.object({
+  "id": zod.number().int(),
+  "storeName": zod.string(),
+  "description": zod.string()
+}).optional()
+})
+
+
+/**
+ * @summary Log out of the current session
+ */
+export const LogoutResponse = zod.object({
+  "success": zod.boolean()
+})
+
+
+/**
+ * @summary Get the current authenticated user
+ */
+export const GetCurrentUserResponse = zod.object({
+  "id": zod.number().int(),
+  "name": zod.string(),
+  "email": zod.string(),
+  "role": zod.enum(['customer', 'seller']),
+  "seller": zod.object({
+  "id": zod.number().int(),
+  "storeName": zod.string(),
+  "description": zod.string()
+}).optional()
+})
+
+

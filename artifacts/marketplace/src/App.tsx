@@ -3,11 +3,15 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useHealthCheck } from '@workspace/api-client-react';
 import { ArrowRight, ChevronDown, Menu, MoveUpRight, Search, Sparkles, X } from 'lucide-react';
 import { ErrorBoundary } from '@/components/error-boundary';
+import { AuthHeaderActions } from '@/components/auth-header-actions';
 import { Toaster } from '@/components/ui/toaster';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import NotFound from '@/pages/not-found';
 import ProductDetail from '@/pages/product-detail';
 import Products from '@/pages/products';
+import Login from '@/pages/login';
+import Register from '@/pages/register';
+import Account from '@/pages/account';
 import { Link, Route, Switch, useLocation, Router as WouterRouter } from 'wouter';
 
 const queryClient = new QueryClient();
@@ -119,7 +123,8 @@ function Home() {
             <button type="button" onClick={() => setSearchOpen((open) => !open)} className="flex h-10 w-10 items-center justify-center rounded-full text-primary transition-colors hover:bg-muted" aria-label="Toggle search" data-testid="button-search">
               <Search size={18} strokeWidth={1.8} />
             </button>
-            <a href="#sellers" className="hidden rounded-full bg-primary px-5 py-2.5 text-[12px] font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 sm:block" data-testid="link-start-selling">Start selling</a>
+             <AuthHeaderActions />
+             <a href="#sellers" className="hidden rounded-full bg-primary px-5 py-2.5 text-[12px] font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 sm:block" data-testid="link-start-selling">Start selling</a>
             <button type="button" onClick={() => setMenuOpen((open) => !open)} className="flex h-10 w-10 items-center justify-center rounded-full bg-muted text-primary md:hidden" aria-label={menuOpen ? 'Close menu' : 'Open menu'} data-testid="button-menu">
               {menuOpen ? <X size={19} /> : <Menu size={19} />}
             </button>
@@ -307,6 +312,9 @@ function Router() {
         <Route path="/" component={Home} />
         <Route path="/products" component={Products} />
         <Route path="/products/:id" component={ProductDetail} />
+        <Route path="/login" component={Login} />
+        <Route path="/register" component={Register} />
+        <Route path="/account" component={Account} />
         <Route component={NotFound} />
       </Switch>
     </RoutedErrorBoundary>
