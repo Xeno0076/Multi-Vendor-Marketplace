@@ -89,10 +89,14 @@ Create a .env file for local development and configure the required database and
 Example:
 DATABASE_URL=your_database_connection_string
 SESSION_SECRET=your_session_secret
+
 Do not commit .env files or other secrets to the repository.
-Running the Application
+
+•Running the Application
+
 Start the development environment:
 pnpm dev
+
 The application will start the frontend and backend development services.
 
 • Future Improvements
