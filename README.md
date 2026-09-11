@@ -56,7 +56,7 @@ Cart Items
 Orders
 Order Items
 
-•Screenshots folder path : https://github.com/Xeno0076/Multi-Vendor-Marketplace#screenshots
+•Screenshots folder path : https://github.com/Xeno0076/Multi-Vendor-Marketplace/code/screenshots
 
 • Project Structure
 
