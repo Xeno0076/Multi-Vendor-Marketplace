@@ -56,6 +56,7 @@ Cart Items
 Orders
 Order Items
 
+•Screenshots folder path : https://github.com/Xeno0076/Multi-Vendor-Marketplace#screenshots
 
 • Project Structure
 
@@ -75,7 +76,7 @@ PostgreSQL
 •Installation
 Clone the repository:
 git clone
- <YOUR_GITHUB_REPOSITORY_URL>
+ https://github.com/Xeno0076/Multi-Vendor-Marketplace
 
 Navigate to the project directory:
 cd marketly-multi-vendor-ecommerce
