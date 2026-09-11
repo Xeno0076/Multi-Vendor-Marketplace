@@ -114,7 +114,7 @@ Completed – Core E-Commerce MVP
 • Author
 
 Manish Kapil
-B.Tech Computer Science & IT
+Full Stack Web Developer 
 Intern ID - CITS2551
 
 
