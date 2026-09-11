@@ -113,6 +113,8 @@ Completed – Core E-Commerce MVP
 
 • Author
 
-Manish
+Manish Kapil
 B.Tech Computer Science & IT
+Intern ID - CITS2551
+
 
