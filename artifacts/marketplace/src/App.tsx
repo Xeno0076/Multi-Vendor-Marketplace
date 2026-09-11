@@ -1,9 +1,14 @@
 import { useState, type ReactNode } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useHealthCheck } from '@workspace/api-client-react';
+import Cart from "./pages/cart";
+import Checkout from "./pages/checkout";
+import Orders from "./pages/orders";
+import OrderDetail from "./pages/order-detail";
 import { ArrowRight, ChevronDown, Menu, MoveUpRight, Search, Sparkles, X } from 'lucide-react';
 import { ErrorBoundary } from '@/components/error-boundary';
 import { AuthHeaderActions } from '@/components/auth-header-actions';
+
 import { Toaster } from '@/components/ui/toaster';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import NotFound from '@/pages/not-found';
@@ -315,6 +320,10 @@ function Router() {
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
         <Route path="/account" component={Account} />
+        <Route path="/cart" component={Cart} />
+        <Route path="/checkout" component={Checkout} />
+        <Route path="/orders" component={Orders} />
+        <Route path="/orders/:id" component={OrderDetail} />
         <Route component={NotFound} />
       </Switch>
     </RoutedErrorBoundary>

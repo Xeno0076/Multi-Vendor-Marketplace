@@ -161,3 +161,213 @@ export const GetCurrentUserResponse = zod.object({
 })
 
 
+/**
+ * @summary Get the current user's cart
+ */
+export const GetCartResponse = zod.object({
+  "id": zod.number().int(),
+  "items": zod.array(zod.object({
+  "id": zod.number().int(),
+  "productId": zod.number().int(),
+  "productName": zod.string(),
+  "productImage": zod.string(),
+  "sellerName": zod.string(),
+  "unitPrice": zod.number(),
+  "quantity": zod.number().int(),
+  "subtotal": zod.number(),
+  "stock": zod.number().int()
+})),
+  "itemCount": zod.number().int(),
+  "total": zod.number()
+})
+
+
+/**
+ * @summary Clear the current user's cart
+ */
+export const ClearCartResponse = zod.object({
+  "id": zod.number().int(),
+  "items": zod.array(zod.object({
+  "id": zod.number().int(),
+  "productId": zod.number().int(),
+  "productName": zod.string(),
+  "productImage": zod.string(),
+  "sellerName": zod.string(),
+  "unitPrice": zod.number(),
+  "quantity": zod.number().int(),
+  "subtotal": zod.number(),
+  "stock": zod.number().int()
+})),
+  "itemCount": zod.number().int(),
+  "total": zod.number()
+})
+
+
+/**
+ * @summary Add a product to the current user's cart
+ */
+
+
+
+
+export const AddCartItemBody = zod.object({
+  "productId": zod.number().int().min(1),
+  "quantity": zod.number().int().min(1)
+})
+
+export const AddCartItemResponse = zod.object({
+  "id": zod.number().int(),
+  "items": zod.array(zod.object({
+  "id": zod.number().int(),
+  "productId": zod.number().int(),
+  "productName": zod.string(),
+  "productImage": zod.string(),
+  "sellerName": zod.string(),
+  "unitPrice": zod.number(),
+  "quantity": zod.number().int(),
+  "subtotal": zod.number(),
+  "stock": zod.number().int()
+})),
+  "itemCount": zod.number().int(),
+  "total": zod.number()
+})
+
+
+/**
+ * @summary Update a cart item quantity
+ */
+
+
+
+export const UpdateCartItemParams = zod.object({
+  "id": zod.coerce.number().int().min(1)
+})
+
+
+
+
+export const UpdateCartItemBody = zod.object({
+  "quantity": zod.number().int().min(1)
+})
+
+export const UpdateCartItemResponse = zod.object({
+  "id": zod.number().int(),
+  "items": zod.array(zod.object({
+  "id": zod.number().int(),
+  "productId": zod.number().int(),
+  "productName": zod.string(),
+  "productImage": zod.string(),
+  "sellerName": zod.string(),
+  "unitPrice": zod.number(),
+  "quantity": zod.number().int(),
+  "subtotal": zod.number(),
+  "stock": zod.number().int()
+})),
+  "itemCount": zod.number().int(),
+  "total": zod.number()
+})
+
+
+/**
+ * @summary Remove a cart item
+ */
+
+
+
+export const RemoveCartItemParams = zod.object({
+  "id": zod.coerce.number().int().min(1)
+})
+
+export const RemoveCartItemResponse = zod.object({
+  "id": zod.number().int(),
+  "items": zod.array(zod.object({
+  "id": zod.number().int(),
+  "productId": zod.number().int(),
+  "productName": zod.string(),
+  "productImage": zod.string(),
+  "sellerName": zod.string(),
+  "unitPrice": zod.number(),
+  "quantity": zod.number().int(),
+  "subtotal": zod.number(),
+  "stock": zod.number().int()
+})),
+  "itemCount": zod.number().int(),
+  "total": zod.number()
+})
+
+
+/**
+ * @summary Place an order from the current user's cart
+ */
+export const CreateOrderBody = zod.object({
+
+}).passthrough()
+
+export const CreateOrderResponse = zod.object({
+  "id": zod.number().int(),
+  "totalAmount": zod.number(),
+  "status": zod.enum(['pending', 'paid', 'processing', 'shipped', 'delivered', 'cancelled']),
+  "createdAt": zod.coerce.date(),
+  "items": zod.array(zod.object({
+  "id": zod.number().int(),
+  "productId": zod.number().int(),
+  "productName": zod.string(),
+  "sellerId": zod.number().int(),
+  "sellerName": zod.string(),
+  "price": zod.number(),
+  "quantity": zod.number().int(),
+  "subtotal": zod.number()
+}))
+})
+
+
+/**
+ * @summary List the current user's orders
+ */
+export const ListOrdersResponseItem = zod.object({
+  "id": zod.number().int(),
+  "totalAmount": zod.number(),
+  "status": zod.enum(['pending', 'paid', 'processing', 'shipped', 'delivered', 'cancelled']),
+  "createdAt": zod.coerce.date(),
+  "items": zod.array(zod.object({
+  "id": zod.number().int(),
+  "productId": zod.number().int(),
+  "productName": zod.string(),
+  "sellerId": zod.number().int(),
+  "sellerName": zod.string(),
+  "price": zod.number(),
+  "quantity": zod.number().int(),
+  "subtotal": zod.number()
+}))
+})
+export const ListOrdersResponse = zod.array(ListOrdersResponseItem)
+
+
+/**
+ * @summary Get one of the current user's orders
+ */
+
+
+
+export const GetOrderParams = zod.object({
+  "id": zod.coerce.number().int().min(1)
+})
+
+export const GetOrderResponse = zod.object({
+  "id": zod.number().int(),
+  "totalAmount": zod.number(),
+  "status": zod.enum(['pending', 'paid', 'processing', 'shipped', 'delivered', 'cancelled']),
+  "createdAt": zod.coerce.date(),
+  "items": zod.array(zod.object({
+  "id": zod.number().int(),
+  "productId": zod.number().int(),
+  "productName": zod.string(),
+  "sellerId": zod.number().int(),
+  "sellerName": zod.string(),
+  "price": zod.number(),
+  "quantity": zod.number().int(),
+  "subtotal": zod.number()
+}))
+})
+
+

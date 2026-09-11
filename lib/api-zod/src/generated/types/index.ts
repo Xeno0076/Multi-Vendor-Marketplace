@@ -6,15 +6,23 @@
  * OpenAPI spec version: 0.1.0
  */
 
+export * from './addCartItemRequest';
 export * from './authLogoutResponse';
 export * from './authUser';
 export * from './authUserRole';
+export * from './cart';
+export * from './cartItem';
 export * from './category';
 export * from './error';
 export * from './healthStatus';
 export * from './listProductsParams';
 export * from './loginRequest';
 export * from './marketplaceProduct';
+export * from './order';
+export * from './orderItem';
+export * from './orderStatus';
+export * from './placeOrderRequest';
 export * from './registerRequest';
 export * from './registerRequestRole';
 export * from './sellerProfile';
+export * from './updateCartItemRequest';

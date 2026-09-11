@@ -90,6 +90,70 @@ export interface AuthLogoutResponse {
   success: boolean;
 }
 
+export interface AddCartItemRequest {
+  /** @minimum 1 */
+  productId: number;
+  /** @minimum 1 */
+  quantity: number;
+}
+
+export interface UpdateCartItemRequest {
+  /** @minimum 1 */
+  quantity: number;
+}
+
+export interface CartItem {
+  id: number;
+  productId: number;
+  productName: string;
+  productImage: string;
+  sellerName: string;
+  unitPrice: number;
+  quantity: number;
+  subtotal: number;
+  stock: number;
+}
+
+export interface Cart {
+  id: number;
+  items: CartItem[];
+  itemCount: number;
+  total: number;
+}
+
+export interface PlaceOrderRequest { [key: string]: unknown }
+
+export interface OrderItem {
+  id: number;
+  productId: number;
+  productName: string;
+  sellerId: number;
+  sellerName: string;
+  price: number;
+  quantity: number;
+  subtotal: number;
+}
+
+export type OrderStatus = typeof OrderStatus[keyof typeof OrderStatus];
+
+
+export const OrderStatus = {
+  pending: 'pending',
+  paid: 'paid',
+  processing: 'processing',
+  shipped: 'shipped',
+  delivered: 'delivered',
+  cancelled: 'cancelled',
+} as const;
+
+export interface Order {
+  id: number;
+  totalAmount: number;
+  status: OrderStatus;
+  createdAt: string;
+  items: OrderItem[];
+}
+
 export type ListProductsParams = {
 search?: string;
 /**

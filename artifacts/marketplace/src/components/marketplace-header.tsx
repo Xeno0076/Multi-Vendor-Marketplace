@@ -40,16 +40,14 @@ export function MarketplaceHeader({ backLabel = 'Back to collection', showBack =
             Browse goods
           </Link>
           <AuthHeaderActions />
-          <button
-            type="button"
-            disabled
-            className="flex h-10 w-10 cursor-not-allowed items-center justify-center rounded-full bg-muted/70 text-primary/45"
-            aria-label="Cart coming soon"
-            title="Cart coming soon"
-            data-testid="button-cart-disabled"
-          >
-            <ShoppingBag size={17} strokeWidth={1.8} />
-          </button>
+          <Link
+  href="/cart"
+  className="relative flex h-10 w-10 items-center justify-center rounded-full transition-colors hover:bg-muted"
+  aria-label="Shopping cart"
+  title="Shopping cart"
+>
+  <ShoppingBag size={19} strokeWidth={1.8} />
+</Link>
         </div>
       </div>
     </header>
