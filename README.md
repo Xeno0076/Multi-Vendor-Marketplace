@@ -63,6 +63,38 @@ artifacts/
 ├── marketplace/     # React frontend
 └── api-server/      # Express backend
 
+✓ Getting Started
+
+•Pre-requisites
+Make sure the following are installed:
+
+Node.js
+pnpm
+PostgreSQL
+
+•Installation
+Clone the repository:
+git clone
+ <YOUR_GITHUB_REPOSITORY_URL>
+
+Navigate to the project directory:
+cd marketly-multi-vendor-ecommerce
+
+Install dependencies:
+pnpm install
+
+•Environment Variables
+Create a .env file for local development and configure the required database and application environment variables.
+
+Example:
+DATABASE_URL=your_database_connection_string
+SESSION_SECRET=your_session_secret
+Do not commit .env files or other secrets to the repository.
+Running the Application
+Start the development environment:
+pnpm dev
+The application will start the frontend and backend development services.
+
 • Future Improvements
 
 Seller dashboard
